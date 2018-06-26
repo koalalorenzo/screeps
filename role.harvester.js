@@ -1,4 +1,4 @@
-var resource = require('resourceFinder');
+var resource = require('resource.finder');
 var roleHarvester = {
 
     /** @param {Creep} creep **/
