@@ -12,11 +12,11 @@ module.exports.loop = function () {
         }
     }
     
-    roles.run('harvester', 1);
-    roles.run('upgrader', 4);
-    roles.run('builder', 4);
+    roles.run(roomSpawn, 'harvester', 1);
+    roles.run(roomSpawn, 'upgrader', 4);
+    roles.run(roomSpawn, 'builder', 4);
 
-    if( roomSpawn.spawning) {
+    if(roomSpawn.spawning) {
         const spawningCreep = Game.creeps[ roomSpawn.spawning.name];
          roomSpawn.room.visual.text(
             '🛠️' + spawningCreep.memory.role,
