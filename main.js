@@ -37,9 +37,7 @@ module.exports.loop = function () {
           case 'upgrader':
             roleUpgrader.run(creep);
             break;
-          case 'builder':
-            if(creep.room.find(FIND_))
-            
+          case 'builder':            
             roleBuilder.run(creep);
             break;
           default:
