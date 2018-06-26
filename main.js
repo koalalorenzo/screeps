@@ -1,43 +1,23 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
+const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
+const roles = require('roles');
 
-var spawn = Game.spawns['Darlene'];
+const spawn = Game.spawns['Darlene'];
 
 module.exports.loop = function () {
-
-    for(var name in Memory.creeps) {
+    for(let name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
         }
     }
-
-    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-
-    if(upgraders.length < 4) {
-        var newName = 'Upgrader' + Game.time;
-        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'upgrader'}});
-    }
-
-    if(builders.length < 6) {
-        var newName = 'Builder' + Game.time;
-        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'builder'}});
-    }
-
-    // if(builders.length > 10) {
-    //     var newName = 'Builder' + Game.time;
-    //     spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-    //         {memory: {role: 'builder'}});
-    // }
-
+    
+    roles.run('harvester', 1);
+    roles.run('upgrader', 4);
+    roles.run('builder', 4);
 
     if(spawn.spawning) {
-        var spawningCreep = Game.creeps[spawn.spawning.name];
+        const spawningCreep = Game.creeps[spawn.spawning.name];
         spawn.room.visual.text(
             '🛠️' + spawningCreep.memory.role,
             spawn.pos.x + 1,
@@ -45,8 +25,9 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
+    for(let name in Game.creeps) {
+        const creep = Game.creeps[name];
+
         if(spawn.energy < spawn.energyCapacity) {
           roleHarvester.run(creep);
           continue;
@@ -57,10 +38,12 @@ module.exports.loop = function () {
             roleUpgrader.run(creep);
             break;
           case 'builder':
+            if(creep.room.find(FIND_))
+            
             roleBuilder.run(creep);
             break;
           default:
-            roleUpgrader.run(creep);
+            roleHarvester.run(creep);
         }
     }
 }
