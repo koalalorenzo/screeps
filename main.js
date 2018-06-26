@@ -17,19 +17,13 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(harvesters.length < 3) {
-        var newName = 'Harvester' + Game.time;
-        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'harvester'}});
-    }
-
-    if(upgraders.length < 3) {
+    if(upgraders.length < 4) {
         var newName = 'Upgrader' + Game.time;
         spawn.spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'upgrader'}});
     }
 
-    if(builders.length < 8) {
+    if(builders.length < 6) {
         var newName = 'Builder' + Game.time;
         spawn.spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'builder'}});
@@ -53,15 +47,12 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        if(spawn.energy < spawn.energyCapacity) {
+          roleHarvester.run(creep);
+          continue;
+        }
 
         switch (creep.memory.role) {
-          case 'harvester':
-            if(spawn.energy > spawn.energyCapacity) {
-              roleHarvester.run(creep);
-            }else{
-              roleBuilder.run(creep);
-            }
-            break;
           case 'upgrader':
             roleUpgrader.run(creep);
             break;
@@ -69,7 +60,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
             break;
           default:
-            roleHarvester.run(creep);
+            roleUpgrader.run(creep);
         }
     }
 }
