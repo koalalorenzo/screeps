@@ -17,7 +17,7 @@ module.exports.loop = function () {
     roles.run(roomSpawn, 'builder', 4);
 
     if(roomSpawn.spawning) {
-        const spawningCreep = Game.creeps[ roomSpawn.spawning.name];
+        const spawningCreep = Game.creeps[roomSpawn.spawning.name];
          roomSpawn.room.visual.text(
             '🛠️' + spawningCreep.memory.role,
              roomSpawn.pos.x + 1,
@@ -28,7 +28,7 @@ module.exports.loop = function () {
     for(let name in Game.creeps) {
         const creep = Game.creeps[name];
 
-        if( roomSpawn.energy <  roomSpawn.energyCapacity) {
+        if(roomSpawn.energy < roomSpawn.energyCapacity) {
           roleHarvester.run(creep);
           continue;
         }

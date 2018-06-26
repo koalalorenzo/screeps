@@ -1,16 +1,15 @@
-var resource = require('resource.finder');
-var roleHarvester = {
-
+const resource = require('resource.finder');
+module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
         if(creep.carry.energy < creep.carryCapacity) {
-            var source = resource.getSource(creep, 2);
+            const source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
         else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
                         structure.energy < structure.energyCapacity;
@@ -24,5 +23,3 @@ var roleHarvester = {
         }
     }
 };
-
-module.exports = roleHarvester;

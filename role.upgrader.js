@@ -1,6 +1,5 @@
-var resource = require('resource.finder');
-
-var roleUpgrader = {
+const resource = require('resource.finder');
+module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -18,14 +17,11 @@ var roleUpgrader = {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
-        }
-        else {
-            var source = resource.getSource(creep, 2);
+        } else {
+            const source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
     }
 };
-
-module.exports = roleUpgrader;
