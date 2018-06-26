@@ -2,6 +2,8 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
+var spawn = Game.spawns['Darlene'];
+
 module.exports.loop = function () {
 
     for(var name in Memory.creeps) {
@@ -17,35 +19,35 @@ module.exports.loop = function () {
 
     if(harvesters.length < 3) {
         var newName = 'Harvester' + Game.time;
-        Game.spawns['Darlene'].spawnCreep([WORK,CARRY,MOVE], newName,
+        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'harvester'}});
     }
 
     if(upgraders.length < 3) {
         var newName = 'Upgrader' + Game.time;
-        Game.spawns['Darlene'].spawnCreep([WORK,CARRY,MOVE], newName,
+        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'upgrader'}});
     }
 
     if(builders.length < 8) {
         var newName = 'Builder' + Game.time;
-        Game.spawns['Darlene'].spawnCreep([WORK,CARRY,MOVE], newName,
+        spawn.spawnCreep([WORK,CARRY,MOVE], newName,
             {memory: {role: 'builder'}});
     }
 
     // if(builders.length > 10) {
     //     var newName = 'Builder' + Game.time;
-    //     Game.spawns['Darlene'].spawnCreep([WORK,CARRY,MOVE], newName,
+    //     spawn.spawnCreep([WORK,CARRY,MOVE], newName,
     //         {memory: {role: 'builder'}});
     // }
 
 
-    if(Game.spawns['Darlene'].spawning) {
-        var spawningCreep = Game.creeps[Game.spawns['Darlene'].spawning.name];
-        Game.spawns['Darlene'].room.visual.text(
+    if(spawn.spawning) {
+        var spawningCreep = Game.creeps[spawn.spawning.name];
+        spawn.room.visual.text(
             '🛠️' + spawningCreep.memory.role,
-            Game.spawns['Darlene'].pos.x + 1,
-            Game.spawns['Darlene'].pos.y,
+            spawn.pos.x + 1,
+            spawn.pos.y,
             {align: 'left', opacity: 0.8});
     }
 
@@ -54,7 +56,11 @@ module.exports.loop = function () {
 
         switch (creep.memory.role) {
           case 'harvester':
-            roleHarvester.run(creep);
+            if(spawn.energy > spawn.energyCapacity) {
+              roleHarvester.run(creep);
+            }else{
+              roleBuilder.run(creep);
+            }
             break;
           case 'upgrader':
             roleUpgrader.run(creep);
