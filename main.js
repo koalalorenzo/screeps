@@ -15,7 +15,7 @@ module.exports.loop = function () {
 
     roleHarvester.spawn(roomSpawn)
     roleUpgrader.spawn(roomSpawn)
-    // roleBuilder.spawn(roomSpawn)
+    roleBuilder.spawn(roomSpawn)
     roleSoldier.spawn(roomSpawn)
 
     if(roomSpawn.spawning) {
@@ -34,12 +34,12 @@ module.exports.loop = function () {
           case 'upgrader':
             roleUpgrader.run(creep);
             break;
-          case 'builder':            
+          case 'builder':
             roleBuilder.run(creep);
             break;
-          case 'soldier':            
+          case 'soldier':
             roleSoldier.run(creep);
-            break;         
+            break;
           default:
             roleHarvester.run(creep);
         }
