@@ -15,7 +15,7 @@ module.exports = {
             return roleUpgrader.run(creep)
         }
 
-        if(creep.carry.energy < creep.carryCapacity) {
+        if(creep.carry.energy == 0) {
             creep.say('harvest');
             let source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
