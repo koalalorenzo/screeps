@@ -11,7 +11,7 @@ module.exports = {
     run: function(creep) {
         // Run only if we have targets, otherwise be a upgrader
         let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
-        if(!toBuild) {
+        if(!toBuild.length) {
             return roleUpgrader.run(creep)
         }
 
@@ -25,8 +25,8 @@ module.exports = {
 
         if(creep.carry.energy == creep.carryCapacity) {
             creep.say('build');
-            if(creep.build(toBuild) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(toBuild, {visualizePathStyle: {stroke: '#ffffff'}});
+            if(creep.build(toBuild[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(toBuild[0], {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
     }
