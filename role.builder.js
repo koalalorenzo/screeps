@@ -2,8 +2,16 @@ const resource = require('resource.finder');
 const roleUpgrader = require('role.upgrader');
 
 module.exports = {
+    initMemory: function(creep){
+        if(creep.memory.building === undefined){
+            creep.memory.building = false
+        }
+    },
+
     /** @param {Creep} creep **/
     run: function(creep) {
+        this.initMemory(creep)
+        
         // Run only if we have targets, otherwise be a upgrader
         let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
         if(!toBuild.length) {
@@ -18,13 +26,15 @@ module.exports = {
         }
 
         if(creep.memory.building) {
+            console.log("Creeper building...")
+            if(creep.build(toBuild[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(toBuild[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            }
+        }else{
+            console.log("Creeper getting sources...")
             let source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
-        }else{
-            if(creep.build(toBuild[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(toBuild[0], {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
     }
