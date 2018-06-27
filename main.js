@@ -34,12 +34,12 @@ module.exports.loop = function () {
           case 'upgrader':
             roleUpgrader.run(creep);
             break;
-          case 'builder':            
+          case 'builder':
             roleBuilder.run(creep);
             break;
-          case 'soldier':            
+          case 'soldier':
             roleSoldier.run(creep);
-            break;         
+            break;
           default:
             roleHarvester.run(creep);
         }
