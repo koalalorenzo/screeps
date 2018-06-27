@@ -23,7 +23,7 @@ module.exports = {
             }
         }
 
-        if(creep.carry.energy == creep.carryCapacity) {
+        if(creep.carry.energy <= creep.carryCapacity && creep.carry.energy != 0) {
             creep.say('build');
             if(creep.build(toBuild[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(toBuild[0], {visualizePathStyle: {stroke: '#ffffff'}});
