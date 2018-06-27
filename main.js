@@ -37,6 +37,9 @@ module.exports.loop = function () {
           case 'builder':            
             roleBuilder.run(creep);
             break;
+          case 'soldier':            
+            roleSoldier.run(creep);
+            break;         
           default:
             roleHarvester.run(creep);
         }
