@@ -1,6 +1,7 @@
 const roleHarvester = require('role.harvester');
 const roleUpgrader = require('role.upgrader');
 const roleBuilder = require('role.builder');
+const roleSoldier = require('role.soldier');
 const roles = require('roles');
 
 
@@ -15,6 +16,7 @@ module.exports.loop = function () {
     roleHarvester.spawn(roomSpawn)
     roleUpgrader.spawn(roomSpawn)
     roleBuilder.spawn(roomSpawn)
+    roleSoldier.spawn(roomSpawn)
 
     if(roomSpawn.spawning) {
         const spawningCreep = Game.creeps[roomSpawn.spawning.name];
