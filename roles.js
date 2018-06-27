@@ -7,10 +7,10 @@ module.exports = {
     }
   },
 
-  spawn: function(spawner, role, parts){
+  spawn: function(spawner, role, parts, mem){
     const newName = role + '_' + (Math.floor(Math.random() * 65534) + 1);
     const opts = {
-      memory: {role: role, ...memory}
+      memory: {role: role, ...mem}
     }
     spawner.spawnCreep(parts, newName, opts)
   },
