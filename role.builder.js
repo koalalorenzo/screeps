@@ -10,7 +10,7 @@ module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
         // Run only if we have targets, otherwise be a upgrader
-        let toBuild = creep.pos.findNearest(FIND_CONSTRUCTION_SITES);
+        let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
         if(!toBuild) {
             return roleUpgrader.run(creep)
         }

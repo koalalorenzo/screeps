@@ -9,7 +9,7 @@ module.exports = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        const emptyStructures = creep.pos.findNearest(FIND_STRUCTURES, {
+        const emptyStructures = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
                     structure.energy < structure.energyCapacity;
