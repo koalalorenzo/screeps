@@ -15,7 +15,7 @@ module.exports.loop = function () {
 
     roleHarvester.spawn(roomSpawn)
     roleUpgrader.spawn(roomSpawn)
-    roleBuilder.spawn(roomSpawn)
+    // roleBuilder.spawn(roomSpawn)
     roleSoldier.spawn(roomSpawn)
 
     if(roomSpawn.spawning) {
