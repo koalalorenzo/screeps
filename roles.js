@@ -1,6 +1,5 @@
 module.exports = {
-  run: function(spawner, role, min){
-    const parts = [WORK,CARRY,MOVE];
+  run: function(spawner, role, min, parts){
     const list = this.list(role);
 
     if(list.length < min) {

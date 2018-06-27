@@ -1,5 +1,10 @@
 const resource = require('resource.finder');
+const roles = require('roles');
+
 module.exports = {
+    spawn: function(roomSpawn){
+        return roles.run(roomSpawn, 'upgrader', 4, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+    },
 
     /** @param {Creep} creep **/
     run: function(creep) {

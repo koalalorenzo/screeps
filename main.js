@@ -11,10 +11,10 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
-    
-    roles.run(roomSpawn, 'harvester', 1);
-    roles.run(roomSpawn, 'upgrader', 4);
-    roles.run(roomSpawn, 'builder', 4);
+
+    roleHarvester.spawn(roomSpawn)
+    roleUpgrader.spawn(roomSpawn)
+    roleBuilder.spawn(roomSpawn)
 
     if(roomSpawn.spawning) {
         const spawningCreep = Game.creeps[roomSpawn.spawning.name];
@@ -27,11 +27,6 @@ module.exports.loop = function () {
 
     for(let name in Game.creeps) {
         const creep = Game.creeps[name];
-
-        if(roomSpawn.energy < roomSpawn.energyCapacity) {
-          roleHarvester.run(creep);
-          continue;
-        }
 
         switch (creep.memory.role) {
           case 'upgrader':

@@ -1,32 +1,37 @@
-var resource = require('resource.finder');
-module.exports = {
+const resource = require('resource.finder');
+const roleUpgrader = require('role.upgrader');
+const roles = require('roles');
 
+module.exports = {
+    spawn: function(roomSpawn){
+        return roles.run(roomSpawn, 'builder', 4, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+    },
+    
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
+        // Run only if we have targets, otherwise be a upgrader
+        let toBuild = creep.pos.findNearest(FIND_CONSTRUCTION_SITES);
+        if(!toBuild) {
+            return roleUpgrader.run(creep)
+        }
+
+        if(creep.carry.energy == 0) {
             creep.say('harvest');
-        }
-        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.building = true;
-            creep.say('build');
-        }
-
-        if(creep.memory.building) {
-            var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            // var noRoad = _.filter(targets, (t) => t.structureType == STRUCTURE_ROAD);
-
-            if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                }
-            }
-        }
-        else {
-            var source = resource.getSource(creep, 2);
+            let source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
+
+            return null
+        }
+
+        if(creep.carry.energy == creep.carryCapacity) {
+            creep.say('build');
+            if(creep.build(toBuild) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(toBuild, {visualizePathStyle: {stroke: '#ffffff'}});
+            }
+
+            return null
         }
     }
 };
