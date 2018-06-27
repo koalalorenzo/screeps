@@ -12,6 +12,10 @@ module.exports = {
             if(creep.attack(targets[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0]);
             }
+        }else{
+            if(Game.flags['soldiers']){
+                creep.moveTo(Game.flags['soldiers'])
+            }
         }
     }
 };
