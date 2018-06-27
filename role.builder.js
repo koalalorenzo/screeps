@@ -21,8 +21,6 @@ module.exports = {
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
-
-            return null
         }
 
         if(creep.carry.energy == creep.carryCapacity) {
@@ -30,8 +28,6 @@ module.exports = {
             if(creep.build(toBuild) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(toBuild, {visualizePathStyle: {stroke: '#ffffff'}});
             }
-
-            return null
         }
     }
 };
