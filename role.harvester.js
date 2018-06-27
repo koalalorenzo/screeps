@@ -1,12 +1,7 @@
 const resource = require('resource.finder');
 const roleUpgrader = require('role.upgrader');
-const roles = require('roles');
 
 module.exports = {
-    spawn: function(roomSpawn){
-        return roles.run(roomSpawn, 'harvester', 4, [WORK, CARRY, MOVE, MOVE]);
-    },
-
     /** @param {Creep} creep **/
     run: function(creep) {
         const emptyStructures = creep.room.find(FIND_STRUCTURES, {

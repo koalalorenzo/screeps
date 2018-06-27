@@ -1,10 +1,4 @@
-const roles = require('roles');
-
 module.exports = {
-    spawn: function(roomSpawn){
-        return roles.run(roomSpawn, 'soldier', 4, [TOUGH, ATTACK, ATTACK, MOVE, MOVE, MOVE]);
-    },
-
     /** @param {Creep} creep **/
     run: function(creep) {
         let targets = creep.room.find(FIND_HOSTILE_CREEPS);
