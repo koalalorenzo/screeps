@@ -1,18 +1,15 @@
 module.exports = {
-  setup: function(spawner, role, min, parts, memory){
+  setup: function(spawner, role, min, parts){
     const list = this.list(role);
 
     if(list.length < min) {
-      this.spawn(spawner, role, parts, memory);
+      this.spawn(spawner, role, parts);
     }
   },
 
-  spawn: function(spawner, role, parts, mem){
+  spawn: function(spawner, role, parts){
     const newName = role + '_' + (Math.floor(Math.random() * 65534) + 1);
-    const opts = {
-      memory: {role: role, ...mem}
-    }
-    spawner.spawnCreep(parts, newName, opts)
+    spawner.spawnCreep(parts, newName, { memory: {role: role} })
   },
 
   list: function(role){
