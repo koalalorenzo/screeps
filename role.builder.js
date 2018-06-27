@@ -15,15 +15,22 @@ module.exports = {
             return roleUpgrader.run(creep)
         }
 
-        if(creep.carry.energy < creep.carryCapacity) {
+        if(creep.memory.building && creep.carry.energy == 0) {
+            creep.memory.building = false;
+            creep.say('🔄 harvest');
+        }
+        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.building = true;
+            creep.say('🚧 build');
+        }
+
+        if(creep.memory.building) {
             creep.say('harvest');
             let source = resource.getSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
-        }
-
-        if(creep.carry.energy == creep.carryCapacity) {
+        }else{
             creep.say('build');
             if(creep.build(toBuild[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(toBuild[0], {visualizePathStyle: {stroke: '#ffffff'}});
