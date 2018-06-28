@@ -20,6 +20,8 @@ module.exports = {
             }
         })
 
+        console.log(toRepair)
+
         if(!toBuild.length || !toRepair.length) {
             return roleUpgrader.run(creep)
         }
