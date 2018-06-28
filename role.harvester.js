@@ -1,5 +1,6 @@
 const resource = require('resource.finder');
-const roleUpgrader = require('role.upgrader');
+// const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
 
 module.exports = {
     /** @param {Creep} creep **/
@@ -15,7 +16,7 @@ module.exports = {
         });
 
         if(emptyStructures.length == 0) {
-            return roleUpgrader.run(creep)
+            return roleBuilder.run(creep)
         }
 
         if(creep.carry.energy < creep.carryCapacity) {
