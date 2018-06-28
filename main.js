@@ -7,12 +7,16 @@ const roles = require('roles');
 
 module.exports.loop = function () {
     const roomSpawn = Game.spawns['Darlene'];
+    const roomName = 'W29N54';
+
+    // Cleanup dead creeps memory
     for(let name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
         }
     }
 
+    // Spawn few roles
     roles.setup(roomSpawn, 'harvester', 4, [WORK, CARRY, MOVE]);
     roles.setup(roomSpawn, 'upgrader', 4, [WORK, CARRY, MOVE, MOVE]);
     roles.setup(roomSpawn, 'builder', 4, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
@@ -21,12 +25,13 @@ module.exports.loop = function () {
     if(roomSpawn.spawning) {
         const spawningCreep = Game.creeps[roomSpawn.spawning.name];
          roomSpawn.room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
+             spawningCreep.memory.role,
              roomSpawn.pos.x + 1,
              roomSpawn.pos.y,
             {align: 'left', opacity: 0.8});
     }
 
+    // Run the roles
     for(let name in Game.creeps) {
         const creep = Game.creeps[name];
 
@@ -44,4 +49,13 @@ module.exports.loop = function () {
             roleHarvester.run(creep);
         }
     }
+
+    const towers = Game.rooms[roomName].find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+    for (let tower of towers) {
+        let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target != undefined) {
+            tower.attack(target);
+        }
+    }
+
 }
