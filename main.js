@@ -17,10 +17,10 @@ module.exports.loop = function () {
     }
 
     // Spawn few roles
-    roles.setup(roomSpawn, 'harvester', 4, [WORK, CARRY, MOVE]);
+    roles.setup(roomSpawn, 'harvester', 5, [WORK, CARRY, MOVE]);
     roles.setup(roomSpawn, 'upgrader', 4, [WORK, CARRY, MOVE, MOVE]);
-    roles.setup(roomSpawn, 'builder', 4, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
-    roles.setup(roomSpawn, 'soldier', 4, [TOUGH, ATTACK, MOVE, MOVE]);
+    roles.setup(roomSpawn, 'builder', 5, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+    roles.setup(roomSpawn, 'soldier', 2, [TOUGH, ATTACK, MOVE, MOVE]);
 
     if(roomSpawn.spawning) {
         const spawningCreep = Game.creeps[roomSpawn.spawning.name];
