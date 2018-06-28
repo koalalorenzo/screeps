@@ -58,4 +58,9 @@ module.exports.loop = function () {
         }
     }
 
+    // Some extra notifications:
+    let hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS)
+    if(hostiles.length > 0) {
+        Game.notify(`User ${hostiles[0].owner.username} spotted in room ${roomName}`);
+    }
 }
