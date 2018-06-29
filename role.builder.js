@@ -14,14 +14,7 @@ module.exports = {
 
         // Run only if we have targets, otherwise be a upgrader
         let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
-        let toRepair = creep.room.find(FIND_STRUCTURES, {
-            filter: function(structure){
-                return (
-                    structure.structureType == STRUCTURE_ROAD ||
-                    structure.structureType == STRUCTURE_TOWER
-                )&& structure.hits < structure.hitsMax;
-            }
-        })
+        let toRepair = resource.getStructuresToRepair(creep, 2)
 
         if(!toBuild.length && !toRepair.length) {
             return roleUpgrader.run(creep)
@@ -42,8 +35,8 @@ module.exports = {
                 }
             // otherwise check for repairs
             }else{
-                if(creep.repair(toRepair[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(toRepair[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                if(creep.repair(toRepair) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(toRepair, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }else{
