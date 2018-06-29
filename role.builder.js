@@ -15,8 +15,11 @@ module.exports = {
         // Run only if we have targets, otherwise be a upgrader
         let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
         let toRepair = creep.room.find(FIND_STRUCTURES, {
-            filter: function(object){
-                return object.hits < object.hitsMax;
+            filter: function(structure){
+                return (
+                    structure.structureType == STRUCTURE_ROAD ||
+                    structure.structureType == STRUCTURE_TOWER
+                )&& structure.hits < structure.hitsMax;
             }
         })
 
