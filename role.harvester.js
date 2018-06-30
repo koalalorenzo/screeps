@@ -6,13 +6,16 @@ module.exports = {
     /** @param {Creep} creep **/
     run: function(creep) {
         const emptyStructures = creep.room.find(FIND_STRUCTURES, {
-            filter: (structure) => {
+            filter: (s) => {
+                if (s.structureType == STRUCTURE_STORAGE){
+                  return s.store[RESOURCE_ENERGY] < s.storeCapacity;
+                }
+
                 return (
-                    structure.structureType == STRUCTURE_EXTENSION ||
-                    structure.structureType == STRUCTURE_SPAWN ||
-                    structure.structureType == STRUCTURE_TOWER ||
-                    structure.structureType == STRUCTURE_STORAGE
-                ) && structure.energy < structure.energyCapacity;
+                    s.structureType == STRUCTURE_EXTENSION ||
+                    s.structureType == STRUCTURE_SPAWN ||
+                    s.structureType == STRUCTURE_TOWER
+                ) && s.energy < s.energyCapacity;
             }
         });
 
