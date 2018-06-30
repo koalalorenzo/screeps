@@ -11,15 +11,28 @@ module.exports = {
     }
   },
 
+  getStorageOrSource: function(creep, split){
+    const storages = creep.room.find(FIND_STRUCTURES, {
+      filter: (s) => s.structureType == STRUCTURE_STORAGE && s.energy > 0
+    });
+
+    if(storages.length == 0) return this.getSource(creep, split);
+    if(storages.length == 1) return storages[0];
+
+    const creepMagicNumber = creep.name.match(/\d+$/)[0];
+    if (creepMagicNumber % split == 0){
+      return storages[0]
+    }else {
+      return storages[1]
+    }
+  },
 
   getStructuresToRepair: function(creep, split){
     let toRepair = creep.room.find(FIND_STRUCTURES, {
-      filter: function(structure){
-          return (
-              structure.structureType == STRUCTURE_ROAD ||
-              structure.structureType == STRUCTURE_TOWER
-          )&& structure.hits < structure.hitsMax;
-      }
+      filter: (structure) => (
+            structure.structureType == STRUCTURE_ROAD ||
+            structure.structureType == STRUCTURE_TOWER
+        ) && structure.hits < structure.hitsMax
     })
     if(toRepair.length == 1) return toRepair[0];
 
