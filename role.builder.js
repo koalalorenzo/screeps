@@ -15,7 +15,7 @@ module.exports = {
         // Run only if we have targets, otherwise be a upgrader
         let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
         let toRepair = resource.getStructuresToRepair(creep, 2)
-
+        console.log(toRepair)
         if(!toBuild.length && !toRepair.length) {
             return roleUpgrader.run(creep)
         }
