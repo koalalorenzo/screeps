@@ -17,9 +17,9 @@ module.exports.loop = function () {
     }
 
     // Spawn few roles
-    roles.setup(roomSpawn, 'harvester', 5, [WORK, CARRY, MOVE]);
+    roles.setup(roomSpawn, 'harvester', 8, [WORK, CARRY, MOVE]);
     roles.setup(roomSpawn, 'upgrader', 4, [WORK, CARRY, MOVE, MOVE]);
-    roles.setup(roomSpawn, 'builder', 5, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
+    roles.setup(roomSpawn, 'builder', 6, [WORK, WORK, CARRY, MOVE, MOVE, MOVE]);
     roles.setup(roomSpawn, 'soldier', 2, [TOUGH, ATTACK, MOVE, MOVE]);
 
     if(roomSpawn.spawning) {
