@@ -16,7 +16,7 @@ module.exports = {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         } else {
-            const source = resource.getSource(creep, 2);
+            const source = resource.getStorageOrSource(creep, 2);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
