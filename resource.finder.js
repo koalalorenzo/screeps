@@ -13,7 +13,7 @@ module.exports = {
 
   getStorageOrSource: function(creep, split){
     const storages = creep.room.find(FIND_STRUCTURES, {
-      filter: (s) => s.structureType == STRUCTURE_STORAGE && s.energy > 0
+      filter: (s) => s.structureType == STRUCTURE_STORAGE && s.store[RESOURCE_ENERGY] > 0
     });
 
     if(storages.length == 0) return this.getSource(creep, split);
