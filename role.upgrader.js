@@ -1,3 +1,5 @@
+const roles = require('roles');
+
 module.exports = {
   /** @param {Creep} creep **/
   run: function(creep) {
