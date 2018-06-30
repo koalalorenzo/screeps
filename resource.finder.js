@@ -1,6 +1,7 @@
 module.exports = {
   getSource: function(creep, split){
     const sources = creep.room.find(FIND_SOURCES);
+    if(sources === undefined || sources.length == 0) return []
     if(sources.length == 1) return sources[0];
 
     const creepMagicNumber = creep.name.match(/\d+$/)[0];
@@ -16,7 +17,7 @@ module.exports = {
       filter: (s) => s.structureType == STRUCTURE_STORAGE && s.store[RESOURCE_ENERGY] > 0
     });
 
-    if(storages.length == 0) return this.getSource(creep, split);
+    if(storages === undefined || storages.length == 0) return this.getSource(creep, split);
     if(storages.length == 1) return storages[0];
 
     const creepMagicNumber = creep.name.match(/\d+$/)[0];
@@ -34,6 +35,7 @@ module.exports = {
           structure.structureType == STRUCTURE_TOWER
         ) && structure.hits < structure.hitsMax
     })
+    if(toRepair === undefined) return [];
     if(toRepair.length == 1) return toRepair[0];
 
     const creepMagicNumber = creep.name.match(/\d+$/)[0];
