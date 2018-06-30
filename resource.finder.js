@@ -30,8 +30,8 @@ module.exports = {
   getStructuresToRepair: function(creep, split){
     let toRepair = creep.room.find(FIND_STRUCTURES, {
       filter: (structure) => (
-            structure.structureType == STRUCTURE_ROAD ||
-            structure.structureType == STRUCTURE_TOWER
+          structure.structureType == STRUCTURE_ROAD ||
+          structure.structureType == STRUCTURE_TOWER
         ) && structure.hits < structure.hitsMax
     })
     if(toRepair.length == 1) return toRepair[0];
