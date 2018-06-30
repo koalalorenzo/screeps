@@ -5,17 +5,17 @@ const roleUpgrader = require('role.upgrader');
 module.exports = {
   initMemory: function(creep){
     if(creep.memory.building === undefined){
-      creep.memory.building = false
+      creep.memory.building = false;
     }
   },
 
   /** @param {Creep} creep **/
   run: function(creep) {
-    this.initMemory(creep)
+    this.initMemory(creep);
 
     // Run only if we have targets, otherwise be a upgrader
     let toBuild = creep.room.find(FIND_CONSTRUCTION_SITES);
-    let toRepair = resource.getStructuresToRepair(creep, 2)
+    let toRepair = resource.getStructuresToRepair(creep, 2);
 
     if(toBuild.length == 0 && toRepair.length == 0) {
       return roleUpgrader.run(creep)
