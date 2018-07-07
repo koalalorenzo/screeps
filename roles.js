@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getEnergy: function(creep) {
-    const source = resource.getStorageOrSource(creep, 2);
+    const source = resource.getStorageOrSource(creep);
 
     if(source.structureType == STRUCTURE_STORAGE) {
       if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

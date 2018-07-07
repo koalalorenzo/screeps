@@ -24,7 +24,7 @@ module.exports = {
     }
 
     if(creep.carry.energy < creep.carryCapacity) {
-      const source = resource.getSource(creep, 2);
+      const source = resource.getSource(creep);
       if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
         creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
       }
